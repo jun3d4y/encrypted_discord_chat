@@ -10,6 +10,6 @@ Just add your discord token in the ```config.conf``` file.
 ## Usage
 
 ```bash
-phyton main.py'
+phyton main.py
 ```
 Then specify your interlocutor discord id.
