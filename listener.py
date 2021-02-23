@@ -1,5 +1,6 @@
 from src import custom_privnote_api as privnote_api
 from src import custom_discord_api as discord_api
+import socket
 import time
 import sys
 import os
@@ -11,14 +12,13 @@ class CColor:
     Blue = '\u001b[34m'
     Cyan = '\u001b[36m'
     White = '\033[0m'
+    
 os.system('color')
-discord = discord_api.Discord(sys.argv[1], sys.argv[2])
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("localhost", 6666))
 
+
+print(f"{CColor.Blue}[?]{CColor.White} This window is where messages will be printed")
 while True :
-    messages = discord.get_messages()
-    for message in messages :
-        if "https://privnote.com/" in message :
-                print(f'{CColor.Red}{privnote_api.retrieve_text(message)}{CColor.White}')
-        elif message == "YOU" :
-            print(f"{CColor.Green}YOU SENT A MESSAGE")
-    time.sleep(1)
+    message = client.recv(9999).decode('utf-8')
+    print(message)
